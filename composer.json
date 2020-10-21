@@ -1,0 +1,23 @@
+{
+    "name": "justijndepover/crop-images",
+    "description": "Bulk crop images to a specific format",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Justijn Depover",
+            "email": "justijndepover@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/console": "^5.1",
+        "illuminate/collections": "^8.11",
+        "symfony/finder": "^5.1",
+        "spatie/image": "^1.7",
+        "symfony/filesystem": "^5.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src"
+        }
+    }
+}
