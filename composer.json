@@ -10,7 +10,6 @@
     ],
     "require": {
         "symfony/console": "^5.1",
-        "illuminate/collections": "^8.11",
         "symfony/finder": "^5.1",
         "spatie/image": "^1.7",
         "symfony/filesystem": "^5.1"

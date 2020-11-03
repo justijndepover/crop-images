@@ -19,7 +19,7 @@ use Symfony\Component\Finder\Finder;
     ->addArgument('source', InputArgument::REQUIRED, 'The source directory')
     ->addArgument('width', InputArgument::REQUIRED, 'The width of the new images')
     ->addArgument('height', InputArgument::REQUIRED, 'The height of the new images')
-    ->addOption('fit', 'f', InputOption::VALUE_OPTIONAL, 'Fit image inside crop field')
+    ->addOption('whitespace', 'w', InputOption::VALUE_OPTIONAL, 'Add whitespace around the cropped images', false)
     ->setCode(function (InputInterface $input, OutputInterface $output) {
         $finder = new Finder();
         $filesystem = new Filesystem();
@@ -39,7 +39,7 @@ use Symfony\Component\Finder\Finder;
                 Image::load($file->getRealPath())
                     ->fit(Manipulations::FIT_CONTAIN, $width, $height)
                     ->apply()
-                    ->fit(Manipulations::FIT_FILL, $width, $height)
+                    ->fit(($input->getOption('whitespace') !== false ? Manipulations::FIT_FILL : Manipulations::FIT_CROP), $width, $height)
                     ->save($newPath . $file->getRelativePathname());
             } catch (\Exception $e) {
                 $output->writeLn('Failed converting: ' . $file->getRelativePathname());
