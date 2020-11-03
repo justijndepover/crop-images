@@ -36,11 +36,17 @@ use Symfony\Component\Finder\Finder;
 
         foreach ($finder->in($path) as $file) {
             try {
-                Image::load($file->getRealPath())
-                    ->fit(Manipulations::FIT_CONTAIN, $width, $height)
+                $image = Image::load($file->getRealPath());
+
+                if ($input->getOption('whitespace') !== false) {
+                    $image->fit(Manipulations::FIT_CONTAIN, $width, $height)
                     ->apply()
-                    ->fit(($input->getOption('whitespace') !== false ? Manipulations::FIT_FILL : Manipulations::FIT_CROP), $width, $height)
-                    ->save($newPath . $file->getRelativePathname());
+                    ->fit(Manipulations::FIT_FILL, $width, $height);
+                } else {
+                    $image->fit(Manipulations::FIT_CROP, $width, $height);
+                }
+
+                $image->optimize()->save($newPath . $file->getRelativePathname());
             } catch (\Exception $e) {
                 $output->writeLn('Failed converting: ' . $file->getRelativePathname());
             }
