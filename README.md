@@ -13,10 +13,16 @@ After installation, you should add an alias to your terminal config
 
 ## Usage
 ```
-crop [source] [width] [height]
+crop [source] [width] [height] [-w, --whitespace]
 ```
 
 This will generate a new folder in your current directory: `[width]x[height]` with all the cropped images from your source directory.
+
+### Arguments
+- source: The source directory
+- width: The width of the new images
+- height: The height of the new images
+- whitespace: add whitespace around the images, defaults to false
 
 ## Security
 If you find any security related issues, please open an issue or contact me directly at [justijndepover@gmail.com](justijndepover@gmail.com).
