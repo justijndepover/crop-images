@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "symfony/console": "^4.2|^5.0",
+        "symfony/console": "^5.0",
         "symfony/finder": "^5.1",
         "spatie/image": "^1.7",
         "symfony/filesystem": "^5.1"
