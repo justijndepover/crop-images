@@ -9,8 +9,6 @@ You can install the package with composer
 composer global require justijndepover/crop-images
 ```
 
-After installation, you should add an alias to your terminal config
-
 ## Usage
 ```
 crop [source] [width] [height] [-w, --whitespace]

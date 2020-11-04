@@ -17,7 +17,7 @@ use Symfony\Component\Finder\Finder;
 
 (new SingleCommandApplication())
     ->setName('Crop Images')
-    ->setVersion('0.2.0')
+    ->setVersion('0.3.0')
     ->addArgument('source', InputArgument::REQUIRED, 'The source directory')
     ->addArgument('width', InputArgument::REQUIRED, 'The width of the new images')
     ->addArgument('height', InputArgument::REQUIRED, 'The height of the new images')
