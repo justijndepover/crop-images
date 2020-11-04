@@ -3,7 +3,11 @@
 
 ini_set("memory_limit", "-1");
 
-require __DIR__ . '/vendor/autoload.php';
+if (file_exists(__DIR__ . '/../../autoload.php')) {
+    require __DIR__ . '/../../autoload.php';
+} else {
+    require __DIR__ . '/vendor/autoload.php';
+}
 
 use Spatie\Image\Image;
 use Spatie\Image\Manipulations;
@@ -17,7 +21,7 @@ use Symfony\Component\Finder\Finder;
 
 (new SingleCommandApplication())
     ->setName('Crop Images')
-    ->setVersion('0.4.0')
+    ->setVersion('0.5.0')
     ->addArgument('source', InputArgument::REQUIRED, 'The source directory')
     ->addArgument('width', InputArgument::REQUIRED, 'The width of the new images')
     ->addArgument('height', InputArgument::REQUIRED, 'The height of the new images')
