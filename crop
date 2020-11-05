@@ -11,6 +11,7 @@ if (file_exists(__DIR__ . '/../../autoload.php')) {
 
 use Spatie\Image\Image;
 use Spatie\Image\Manipulations;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -21,7 +22,7 @@ use Symfony\Component\Finder\Finder;
 
 (new SingleCommandApplication())
     ->setName('Crop Images')
-    ->setVersion('1.0.0')
+    ->setVersion('1.1.0')
     ->addArgument('source', InputArgument::REQUIRED, 'The source directory')
     ->addArgument('width', InputArgument::REQUIRED, 'The width of the new images')
     ->addArgument('height', InputArgument::REQUIRED, 'The height of the new images')
@@ -39,8 +40,12 @@ use Symfony\Component\Finder\Finder;
         }
 
         $finder->files()->name(['*.jpg', '*.jpeg', '*.JPG', '*.JPEG', '*.png', '*.PNG']);
+        $files = $finder->in($path);
 
-        foreach ($finder->in($path) as $file) {
+        $progressBar = new ProgressBar($output, count($files));
+        $progressBar->start();
+
+        foreach ($files as $file) {
             try {
                 $image = Image::load($file->getRealPath());
 
@@ -56,6 +61,10 @@ use Symfony\Component\Finder\Finder;
             } catch (\Exception $e) {
                 $output->writeLn('Failed converting: ' . $file->getRelativePathname());
             }
+
+            $progressBar->advance();
         }
+
+        $progressBar->finish();
     })
     ->run();
