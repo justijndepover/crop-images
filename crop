@@ -22,7 +22,7 @@ use Symfony\Component\Finder\Finder;
 
 (new SingleCommandApplication())
     ->setName('Crop Images')
-    ->setVersion('1.1.0')
+    ->setVersion('1.2.0')
     ->addArgument('source', InputArgument::REQUIRED, 'The source directory')
     ->addArgument('width', InputArgument::REQUIRED, 'The width of the new images')
     ->addArgument('height', InputArgument::REQUIRED, 'The height of the new images')
@@ -33,7 +33,7 @@ use Symfony\Component\Finder\Finder;
         $path = getcwd() . '/' . $input->getArgument('source');
         $width = $input->getArgument('width');
         $height = $input->getArgument('height');
-        $newPath = getcwd() . '/' . $width . 'x' . $height . '/';
+        $newPath = getcwd() . '/' . ($width != 'null' ? $width : '') . 'x' . ($height != 'null' ? $height : '') . '/';
 
         if (!$filesystem->exists($newPath)) {
             $filesystem->mkdir($newPath, 0700);
@@ -49,7 +49,11 @@ use Symfony\Component\Finder\Finder;
             try {
                 $image = Image::load($file->getRealPath());
 
-                if ($input->getOption('whitespace') !== false) {
+                if ($width == "null") {
+                    $image->height($height);
+                } else if ($height == "null") {
+                    $image->width($width);
+                } else if ($input->getOption('whitespace') !== false) {
                     $image->fit(Manipulations::FIT_CONTAIN, $width, $height)
                     ->apply()
                     ->fit(Manipulations::FIT_FILL, $width, $height);
