@@ -1,6 +1,7 @@
 # Crop Images
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/justijndepover/crop-images.svg?style=flat-square)](https://packagist.org/packages/justijndepover/crop-images)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Total Downloads](https://img.shields.io/packagist/dt/justijndepover/crop-images.svg?style=flat-square)](https://packagist.org/packages/justijndepover/crop-images)
 
 ## Installation
