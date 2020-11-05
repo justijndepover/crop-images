@@ -36,7 +36,7 @@ use Symfony\Component\Finder\Finder;
         $newPath = getcwd() . '/' . ($width != 'null' ? $width : '') . 'x' . ($height != 'null' ? $height : '') . '/';
 
         if (!$filesystem->exists($newPath)) {
-            $filesystem->mkdir($newPath, 0700);
+            $filesystem->mkdir($newPath, 0755);
         }
 
         $finder->files()->name(['*.jpg', '*.jpeg', '*.JPG', '*.JPEG', '*.png', '*.PNG']);
